@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>🔥 VHABUK BG 🔥</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      background-color: #000;
+      color: white;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      text-align: center;
+      text-transform: uppercase;
+    }
+    h1 {
+      font-size: 2em;
+      margin-bottom: 20px;
+    }
+    .signal-box {
+      background-color: #111;
+      border-radius: 12px;
+      padding: 20px;
+      max-width: 450px;
+      margin: auto;
+      font-size: 1.3em;
+      box-shadow: 0 0 8px rgba(255,255,255,0.1);
+    }
+    .telegram-btn {
+      display: inline-block;
+      margin-top: 25px;
+      padding: 12px 25px;
+      background-color: #229ED9;
+      color: white;
+      font-size: 16px;
+      border-radius: 10px;
+      text-decoration: none;
+    }
+    .time {
+      margin-top: 15px;
+      font-size: 0.9em;
+      color: #bbb;
+    }
+    .bling-text {
+      margin-top: 30px;
+      font-size: 1.1em;
+      font-weight: bold;
+      color: #00ffcc;
+      animation: bling 1s infinite alternate;
+    }
+    @keyframes bling {
+      0% { text-shadow: 0 0 5px #00ffcc, 0 0 10px #00ffcc, 0 0 15px #00ffcc; }
+      100% { text-shadow: 0 0 20px #00ffff, 0 0 30px #00ffff, 0 0 40px #00ffff; }
+    }
+  </style>
+</head>
+<body>
+  <h1>🔥 VHABUK BG 🔥</h1>
+
+  <div class="signal-box" id="signal">LOADING SIGNAL...</div>
+
+  <a href="https://t.me/TMtrading2" class="telegram-btn" target="_blank">📲 JOIN TELEGRAM</a>
+
+  <div class="time" id="bdt-time">TIME (BDT): LOADING...</div>
+  <div class="time" id="countdown">NEXT SIGNAL IN: 5:00</div>
+
+  <div class="bling-text">
+    ⏰ MOTIVATION: MONEY IS LIFE & LIFE IS MONEY
+  </div>
+
+  <audio id="notifSound" src="https://actions.google.com/sounds/v1/alarms/beep_short.ogg" preload="auto"></audio>
+
+  <script>
+    const pairs = [
+      'USD/BDT', 'USD/JPY', 'USD/ARS', 'USD/PKR', 'USD/PHP',
+      'USD/TRY', 'USD/DZD', 'USD/CHF', 'NZD/CAD'
+    ];
+    const directions = ['CALL ⬆️', 'PUT ⬇️'];
+    let countdown = 300;
+
+    function getRandomSignal() {
+      const pair = pairs[Math.floor(Math.random() * pairs.length)];
+      const dir = directions[Math.floor(Math.random() * directions.length)];
+      return `🚨 SIGNAL ALERT 🚨<br><br><b>PAIR:</b> ${pair}<br><b>DIRECTION:</b> ${dir}<br><b>TIMEFRAME:</b> 1 MINUTE`;
+    }
+
+    function updateSignal() {
+      document.getElementById("signal").innerHTML = getRandomSignal();
+      document.getElementById("notifSound").play();
+      countdown = 300;
+    }
+
+    function updateCountdown() {
+      const minutes = Math.floor(countdown / 60);
+      const seconds = countdown % 60;
+      document.getElementById("countdown").textContent =
+        `NEXT SIGNAL IN: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+      if (countdown > 0) {
+        countdown--;
+      }
+    }
+
+    function updateBDTTime() {
+      const options = {
+        timeZone: 'Asia/Dhaka',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: true
+      };
+      const now = new Date();
+      const timeString = new Intl.DateTimeFormat('en-US', options).format(now);
+      document.getElementById("bdt-time").textContent = `TIME (BDT): ${timeString.toUpperCase()}`;
+    }
+
+    updateSignal();
+    updateBDTTime();
+    updateCountdown();
+
+    setInterval(updateSignal, 300000); // Every 5 minutes
+    setInterval(updateCountdown, 1000); // Every second
+    setInterval(updateBDTTime, 1000); // Every second
+  </script>
+</body>
+</html>
